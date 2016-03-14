@@ -53,7 +53,7 @@ export default function persistStore (store, config = {}, onComplete) {
       }
 
       let key = createStorageKey(storesToProcess[0])
-      let endState = transforms.reduce((subState, transformer) => transformer.in(subState), state[storesToProcess[0]])
+      let endState = transforms.reduce((subState, transformer) => transformer.in(subState, storesToProcess[0]), state[storesToProcess[0]])
       if (typeof endState !== 'undefined') storage.setItem(key, serialize(endState), warnIfSetError(key))
       storesToProcess.shift()
     }, debounce)
